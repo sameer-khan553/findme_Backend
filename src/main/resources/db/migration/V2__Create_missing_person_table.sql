@@ -1,46 +1,47 @@
 CREATE TABLE missing_persons (
 
-    id BIGSERIAL PRIMARY KEY,
+                                 id BIGINT AUTO_INCREMENT PRIMARY KEY,
 
-    case_number VARCHAR(100) NOT NULL UNIQUE,
+                                 case_number VARCHAR(100) NOT NULL UNIQUE,
 
-    full_name VARCHAR(255) NOT NULL,
+                                 full_name VARCHAR(255) NOT NULL,
 
-    age INTEGER,
+                                 age INT,
 
-    gender VARCHAR(20),
+                                 gender VARCHAR(20),
 
-    blood_group VARCHAR(10),
+                                 blood_group VARCHAR(10),
 
-    height DOUBLE PRECISION,
+                                 height DOUBLE,
 
-    weight DOUBLE PRECISION,
+                                 weight DOUBLE,
 
-    identification_marks VARCHAR(500),
+                                 identification_marks VARCHAR(500),
 
-    last_seen_date DATE,
+                                 last_seen_date DATE,
 
-    last_seen_location VARCHAR(500),
+                                 last_seen_location VARCHAR(500),
 
-    city VARCHAR(100),
+                                 city VARCHAR(100),
 
-    state VARCHAR(100),
+                                 state VARCHAR(100),
 
-    country VARCHAR(100),
+                                 country VARCHAR(100),
 
-    description TEXT,
+                                 description TEXT,
 
-    photo_url VARCHAR(500),
+                                 photo_url VARCHAR(500),
 
-    status VARCHAR(30),
+                                 status VARCHAR(30),
 
-    reported_by BIGINT,
+                                 reported_by BIGINT,
 
-    created_at TIMESTAMP,
+                                 created_at TIMESTAMP,
 
-    updated_at TIMESTAMP,
+                                 updated_at TIMESTAMP,
 
-    CONSTRAINT fk_missing_person_user
-        FOREIGN KEY (reported_by)
-        REFERENCES users(id)
+                                 CONSTRAINT fk_missing_person_user
+                                     FOREIGN KEY (reported_by)
+                                         REFERENCES users(id)
+
 );

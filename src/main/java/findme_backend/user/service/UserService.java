@@ -1,5 +1,6 @@
 package findme_backend.user.service;
 
+import findme_backend.email.EmailService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import findme_backend.user.dto.RegisterRequest;
@@ -12,9 +13,11 @@ public class UserService {
 
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
-    public UserService(UserRepository repository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository repository, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.repository = repository;
+        this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -35,8 +38,15 @@ public class UserService {
         }
         
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-
+        
+        emailService.sendWelcomeEmail(
+                user.getEmail(),
+                user.getFirstName()
+        );
         return repository.save(user);
+
+
+
 
     }
 }
